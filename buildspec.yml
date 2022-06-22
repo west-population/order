@@ -17,18 +17,18 @@ phases:
       - echo $AWS_DEFAULT_REGION
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo start command
-#       - docker login --username AWS -p $(aws ecr get-login-password --region $AWS_DEFAULT_REGION) $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - $(docker login --username AWS -p $(aws ecr get-login-password --region eu-central-1) 271153858532.dkr.ecr.eu-central-1.amazonaws.com/)
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - mvn package -Dmaven.test.skip=true
-#       - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION  .
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION  .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-#       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
 
 #cache:
 #  paths:
