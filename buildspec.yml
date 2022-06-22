@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_REPO_NAME: "user21-order"
+    IMAGE_REPO_NAME: "user21-ecr"
 
 phases:
   install:
